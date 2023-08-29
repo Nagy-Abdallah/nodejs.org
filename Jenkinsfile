@@ -13,9 +13,8 @@ pipeline {
         docker {image 'node:18'}
       }
       steps {
-        sh 'apt-get update && apt-get install -y git' // Install Git
-        sh 'npm install --global cross-env'
         sh 'npm install'
+        sh 'npm run build'
       }
     }
         stage('Run Unit Tests') {
@@ -27,15 +26,15 @@ pipeline {
             }
         }
 
-        stage('Run Build') {
-            agent {
-                docker { image 'node:18' }
-            }
-            steps {
+        // stage('Run Build') {
+        //     agent {
+        //         docker { image 'node:18' }
+        //     }
+        //     steps {
                 
-                sh 'npm run build'
-            }
-        }
+        //         sh 'npm run build'
+        //     }
+        // }
 
         // Add more stages for deployment, notifications, etc.
     }
