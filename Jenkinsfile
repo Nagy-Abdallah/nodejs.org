@@ -14,7 +14,6 @@ pipeline {
       }
       steps {
         sh 'npm install'
-        sh 'npm run build'
       }
     }
         stage('Run Unit Tests') {
@@ -26,15 +25,15 @@ pipeline {
             }
         }
 
-        // stage('Run Build') {
-        //     agent {
-        //         docker { image 'node:18' }
-        //     }
-        //     steps {
+        stage('Run Build') {
+            agent {
+                docker { image 'node:18' }
+            }
+            steps {
                 
-        //         sh 'npm run build'
-        //     }
-        // }
+                sh 'npm run build'
+            }
+        }
 
         // Add more stages for deployment, notifications, etc.
     }
